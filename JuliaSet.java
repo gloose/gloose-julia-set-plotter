@@ -88,6 +88,6 @@ public class JuliaSet extends JPanel {
 	public void drawPoint(Graphics g, double xActual, double yActual) {
 		int x = (int) (xActual * FRAME_SIZE / 4) + FRAME_SIZE / 2;
 		int y = (int) (yActual * FRAME_SIZE / 4) * -1 + FRAME_SIZE / 2;
-		g.fillOval(x - POINT_RADIUS, y - POINT_RADIUS, 2 * POINT_RADIUS, 2 * POINT_RADIUS);
+		g.fillRect(x - POINT_RADIUS, y - POINT_RADIUS, 2 * POINT_RADIUS, 2 * POINT_RADIUS);
 	}
 }
