@@ -38,18 +38,18 @@ public class JuliaSet extends JPanel {
 		//Clear everything on the frame so we can redraw it
 		g.clearRect(0, 0, FRAME_SIZE, FRAME_SIZE);
 		
-		/* Scale A between -1 and 0 based on mouse horizontal position.
-		 * Scale B between -0.5 and 0 based on mouse vertical position.
+		/* Scale A between -1.5 and 0.5 based on mouse horizontal position.
+		 * Scale B between -1 and 1 based on mouse vertical position.
 		 */
 		Point p = MouseInfo.getPointerInfo().getLocation();
-		A = 1.0 * (p.x - frame.getX()) / FRAME_SIZE - 1;
-		B = 1.0 * (p.y - frame.getY()) / FRAME_SIZE / 2 - 0.5;
+		A = 1.0 * (p.x - frame.getX()) * 2 / FRAME_SIZE - 1.5;
+		B = 1.0 * (p.y - frame.getY()) * 2 / FRAME_SIZE - 1;
 		
-		/* For every point within -2 <= x <= 2, -1 <= y <= 1,
+		/* For every point within -2 <= x <= 2, -2 <= y <= 2,
 		 * plot the point if it does not approach infinity
 		 */
 		for(double x = -2; x <= 2; x += POINT_INTERVAL) {
-			for(double y = -1; y <= 1; y += POINT_INTERVAL) {
+			for(double y = -2; y <= 2; y += POINT_INTERVAL) {
 				if(!diverges(x, y)) {
 					drawPoint(g, x, y);
 				}
@@ -66,9 +66,6 @@ public class JuliaSet extends JPanel {
 	 * returns false otherwise
 	 */
 	public boolean diverges(double x, double y) {
-		double xMax = 0;
-		double yMax = 0;
-		
 		/* Checks if the function diverges within 50 iterations.
 		 * Also keeps track of the maximum value for use with the next loop
 		 */
@@ -78,20 +75,6 @@ public class JuliaSet extends JPanel {
 			y = f[1];
 			
 			if(Double.isInfinite(x) || Double.isInfinite(y))
-				return true;
-			if(Math.abs(x) > xMax)
-				xMax = Math.abs(x);
-			if(Math.abs(y) > yMax)
-				yMax = Math.abs(y);
-		}
-		
-		/* I don't think this part is actually necessary,
-		 * but it's meant to handle cases that take longer than 50-60 cycles to diverge
-		 * by checking if it's still increasing significantly after 50 iterations
-		 */
-		for(int i = 0; i < 10; i ++) {
-			if(Double.isInfinite(x) || Double.isInfinite(y)
-			|| Math.abs(x) > xMax * 1.001 || Math.abs(y) > yMax * 1.001)
 				return true;
 		}
 		
