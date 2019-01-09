@@ -31,7 +31,7 @@ public class JuliaSet extends JPanel {
 		frame = f;
 	}
 	
-	/* Weird JPanel thing, don't fully understand it.
+	/* Weird JPanel thing
 	 * Overrides a JPanel function that's called whenever you need to draw on the frame
 	 */
 	public void paintComponent(Graphics g) {
@@ -56,6 +56,9 @@ public class JuliaSet extends JPanel {
 			}
 		}
 		
+		/* As soon as it's done drawing, it does it again
+		 * This is another weird JPanel thing
+		 */
 		repaint();	
 	}
 	
