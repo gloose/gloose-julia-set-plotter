@@ -66,9 +66,7 @@ public class JuliaSet extends JPanel {
 	 * returns false otherwise
 	 */
 	public boolean diverges(double x, double y) {
-		/* Checks if the function diverges within 50 iterations.
-		 * Also keeps track of the maximum value for use with the next loop
-		 */
+		// Checks if the function diverges within 50 iterations.
 		for(int i = 0; i < 50; i ++) {
 			double[] f = func(x, y);
 			x = f[0];
