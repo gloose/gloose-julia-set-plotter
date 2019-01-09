@@ -50,9 +50,8 @@ public class JuliaSet extends JPanel {
 		 */
 		for(double x = -2; x <= 2; x += POINT_INTERVAL) {
 			for(double y = -2; y <= 2; y += POINT_INTERVAL) {
-				if(!diverges(x, y)) {
+				if(!diverges(x, y))
 					drawPoint(g, x, y);
-				}
 			}
 		}
 		
